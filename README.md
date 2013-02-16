@@ -5,6 +5,7 @@ Another practice of HTML5 & Javascript.
 1. make the code structure more independent.
 2. more visual eye candy.
 3. remix the chess placing sound.
+4. FPS meter
 
 ## Change Log
 * v1.0 initial version.
