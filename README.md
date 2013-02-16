@@ -11,4 +11,4 @@ Another practice of HTML5 & Javascript.
 * v1.0 initial version.
 
 ## Media Resource
-[writing.wav](http://www.freesound.org/people/braffe2/sounds/83746/) is coming from freesound.org by braffe2, and the rest of images are drawn by myself.
+[writing.wav](https://github.com/zushenyan/HTML5-TicTacToe/blob/master/resource/writing.wav) is coming from [freesound.org](http://www.freesound.org/people/braffe2/sounds/83746/) by braffe2, and the rest of images are drawn by myself.
