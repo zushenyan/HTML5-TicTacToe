@@ -4,13 +4,33 @@ var _lastTime = null;
 var _animBoard = null;
 
 //UI variables
-var _canvas = null, _turnStatus = null, _newGameButton = null, _imBanner = null, _winnerBanner = null;
+var _canvas = null, 
+	_turnStatus = null, 
+	_newGameButton = null, 
+	_imBanner = null, 
+	_winnerBanner = null,
+	_fpsMeter = null;
 
 //initialize things
 function init(){
+	initAnimFrame();
 	initUI();
 	initEvent();
 	initGameLogic();
+
+	window.requestAnimationFrame(update);
+}
+
+function initAnimFrame(){
+	window.requestAnimationFrame = 
+		window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function(callback){
+			window.setTimeout(callback, 1000 / 60);
+		};
 }
 
 function initUI(){
@@ -19,6 +39,7 @@ function initUI(){
 	_newGameButton = document.getElementById("restartButton");
 	_imBanner = document.getElementById("invalidMovementBanner");
 	_winnerBanner = document.getElementById("winnerBanner");
+	_fpsMeter = document.getElementById("fps");
 
 	_canvas.width = 300;
 	_canvas.height = 300;
@@ -26,11 +47,6 @@ function initUI(){
 	_newGameButton.innerHTML = "Restart";
 	_imBanner.innerHTML = "invalid movement!";
 	_winnerBanner.innerHTML = "";
-
-	var main = document.getElementById("main");
-	var width = parseInt(window.getComputedStyle(main, null).getPropertyValue("width"));
-	var lp = (window.screen.width - width) / 2 + "px";
-	main.style.left = lp;
 }
 
 function initEvent(){
@@ -42,7 +58,7 @@ function initEvent(){
 function update(){
 	var elapsedTime = Date.now() - _lastTime;
 
-	//update animations
+	// update animations
 	for(var i = 0; i < _animBoard.length; i++){
 		for(var j = 0; j < _animBoard[i].length; j++){
 			_animBoard[i][j].playAnimation(elapsedTime);
@@ -78,15 +94,18 @@ function update(){
 	else{
 		result = "impossible!";
 	}
-
 	_winnerBanner.innerHTML = result;
 
 	if(_bm.checkWinner() != BoardManager.STATE_GOING){
 		showWinnerBanner();
 	}
 
-	_lastTime = Date.now();
+	updateFPSMeter(elapsedTime);
+
 	draw();
+
+	window.requestAnimationFrame(update);
+	_lastTime = Date.now();
 }
 
 function draw(){
@@ -100,12 +119,14 @@ function draw(){
 		for(var i = 1; i <= 2; i++){
 			var x = _canvas.width;
 			var y = i * (_canvas.height / 3);
+			ctx.beginPath();
 			ctx.moveTo(0, y);
 			ctx.lineTo(x, y);
 			ctx.stroke();
 
 			x = i * (_canvas.width / 3);
 			y = _canvas.height;
+			ctx.beginPath();
 			ctx.moveTo(x, 0);
 			ctx.lineTo(x, y);
 			ctx.stroke();
@@ -215,10 +236,15 @@ function newGame(){
 }
 
 function playSound(){
-	var sound = new Audio();
-	sound.src = "resource/writing.wav";
-	sound.type = "audio/wav";
-	sound.preload = "true";
+	var url = "resource/";
+	var agent = window.navigator.userAgent.toLowerCase();
+	if(agent.indexOf("firefox")){
+		url += "writing.ogg";
+	}
+	else{
+		url += "writing.wav";
+	}
+	var sound = new Audio(url);
 	sound.play();
 }
 
@@ -239,5 +265,8 @@ function hideWinnerBanner(){
 	_winnerBanner.style.display = "none";
 }
 
+function updateFPSMeter(elapsedTime){
+	_fpsMeter.innerHTML = (1000 / elapsedTime).toFixed(1) + " fps";
+}
+
 window.onload = init;
-window.setInterval(update, 100);
