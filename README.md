@@ -8,7 +8,8 @@ download this repository in whatever ways you want and open index.html to start 
 1. make the code structure more independent.
 2. more visual eye candy.
 3. remix the chess placing sound.
-4. FPS meter
+4. FPS meter.
+5. use requestAnimationFrame instead of primative way.
 
 ## Change Log
 * v1.0 initial version.
