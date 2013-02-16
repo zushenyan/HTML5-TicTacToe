@@ -1,6 +1,9 @@
 # HTML5 TicTacToe
 Another practice of HTML5 & Javascript.
 
+## How to Play
+download this repository in whatever ways you want and open index.html to start playing.
+
 ## To Do
 1. make the code structure more independent.
 2. more visual eye candy.
