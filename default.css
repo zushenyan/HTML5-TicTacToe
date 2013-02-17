@@ -7,36 +7,6 @@
 	vertical-align: baseline;
 }
 
-#invalidMovementBanner {
-	position: absolute;
-	width: 270px;
-	height: 35px;
-	background-color: red;
-	font-size: 30px;
-	font-family: Helvetica;
-	text-align: center;
-
-	left: 15px;
-	top: 132px;
-
-	display: none;
-}
-
-#winnerBanner {
-	position: absolute;
-	width: 270px;
-	height: 35px;
-	background-color: red;
-	font-size: 30px;
-	font-family: Helvetica;
-	text-align: center;
-
-	left: 15px;
-	top: 132px;
-
-	display: none;
-}
-
 .showBanner {
 	position: absolute;
 	width: 270px;
@@ -49,7 +19,24 @@
 	left: 15px;
 	top: 132px;
 
-	display: none;
+	visibility: visible;
+	opacity: 1;
+}
+
+.hideBanner {
+	position: absolute;
+	width: 270px;
+	height: 35px;
+	background-color: red;
+	font-size: 30px;
+	font-family: Helvetica;
+	text-align: center;
+
+	left: 15px;
+	top: 132px;
+
+	visibility: hidden;
+	opacity: 0;
 }
 
 #main {

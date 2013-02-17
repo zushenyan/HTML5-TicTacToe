@@ -3,6 +3,9 @@ var _bm = null;
 var _lastTime = null;
 var _animBoard = null;
 
+var _dict_turn = null;
+var _dict_state = null;
+
 //UI variables
 var _canvas = null, 
 	_turnStatus = null, 
@@ -14,6 +17,7 @@ var _canvas = null,
 //initialize things
 function init(){
 	initAnimFrame();
+	initDict();
 	initUI();
 	initEvent();
 	initGameLogic();
@@ -33,6 +37,19 @@ function initAnimFrame(){
 		};
 }
 
+function initDict(){
+	_dict_turn = [];
+	_dict_state = [];
+
+	_dict_turn[Chess.FLAG_O] = "Player: O\'s turn";
+	_dict_turn[Chess.FLAG_X] = "Player: X\'s turn";
+
+	_dict_state[BoardManager.STATE_GOING] = "game is running";
+	_dict_state[BoardManager.STATE_O_WINS] = "O player wins";
+	_dict_state[BoardManager.STATE_X_WINS] = "X player wins";
+	_dict_state[BoardManager.STATE_EVEN] = "even";
+}
+
 function initUI(){
 	_canvas = document.getElementById("canvas");
 	_turnStatus = document.getElementById("turnStatus");
@@ -47,6 +64,9 @@ function initUI(){
 	_newGameButton.innerHTML = "Restart";
 	_imBanner.innerHTML = "invalid movement!";
 	_winnerBanner.innerHTML = "";
+
+	_imBanner.className = "hideBanner";
+	_winnerBanner.className = "hideBanner";
 }
 
 function initEvent(){
@@ -57,6 +77,7 @@ function initEvent(){
 //things about updating and drawing
 function update(){
 	var elapsedTime = Date.now() - _lastTime;
+	updateFPSMeter(elapsedTime);
 
 	// update animations
 	for(var i = 0; i < _animBoard.length; i++){
@@ -65,42 +86,12 @@ function update(){
 		}
 	}
 
-	//update ui info
-	var turn = "";
-	if(_bm.getWhosTurn() == Chess.FLAG_O){
-		turn = "Player: O\'s turn";
-	}
-	else if(_bm.getWhosTurn() == Chess.FLAG_X){
-		turn = "Player: X\'s turn";
-	}
-	else{
-		turn = "what?";
-	}
-	_turnStatus.innerHTML = turn;
-
-	var result = "";
-	if(_bm.checkWinner() == BoardManager.STATE_GOING){
-		result = "game is running";
-	}
-	else if(_bm.checkWinner() == BoardManager.STATE_O_WINS){
-		result = "O player wins!";
-	}
-	else if(_bm.checkWinner() == BoardManager.STATE_X_WINS){
-		result = "X player wins!";
-	}
-	else if(_bm.checkWinner() == BoardManager.STATE_EVEN){
-		result = "even";
-	}
-	else{
-		result = "impossible!";
-	}
-	_winnerBanner.innerHTML = result;
+	_turnStatus.innerHTML = _dict_turn[_bm.getWhosTurn()];
+	_winnerBanner.innerHTML = _dict_state[_bm.checkWinner()];
 
 	if(_bm.checkWinner() != BoardManager.STATE_GOING){
-		showWinnerBanner();
+		setBannerStyle(_winnerBanner, "showBanner");
 	}
-
-	updateFPSMeter(elapsedTime);
 
 	draw();
 
@@ -160,7 +151,7 @@ function mouseInput(e){
 	}
 	catch(e){
 		if(e == BoardManager.ERROR_INVALID_MOVEMENT){
-			showIMBanner();
+			changeBannerStyleAfter(_imBanner, "showBanner", 1500, function(){ setBannerStyle(_imBanner, "hideBanner")});
 		}
 		else if(e == BoardManager.ERROR_GAMEOVER){
 			//do nothing
@@ -232,7 +223,7 @@ function setAnimBoard(x, y, flag){
 function newGame(){
 	_bm.newGame();
 	resetAnimBoard();
-	hideWinnerBanner();
+	setBannerStyle(_winnerBanner, "hideBanner");
 }
 
 function playSound(){
@@ -248,21 +239,13 @@ function playSound(){
 	sound.play();
 }
 
-function showIMBanner(){
-	_imBanner.style.display = "block";
-	window.setTimeout(hideIMBanner, 1500);
+function changeBannerStyleAfter(banner, style, milsec, callback){
+	setBannerStyle(banner, style);
+	window.setTimeout(callback, milsec);
 }
 
-function hideIMBanner(){
-	_imBanner.style.display = "none";
-}
-
-function showWinnerBanner(){
-	_winnerBanner.style.display = "block";
-}
-
-function hideWinnerBanner(){
-	_winnerBanner.style.display = "none";
+function setBannerStyle(banner, style){
+	banner.className = style;
 }
 
 function updateFPSMeter(elapsedTime){
