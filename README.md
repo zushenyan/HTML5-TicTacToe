@@ -7,13 +7,11 @@ download this repository in whatever ways you want and open index.html to start 
 ## Change Log
 * v1.15 (2013/2/17)
 	* doing nothing, steady build.
-
 * v1.1 (2013/2/16)
 	* fix sound can't play on Firefox.
 	* add a very simple FPS meter.
 	* change drawing method from window.setInterval to requestAnimationFrame.
 	* fix a bug which will cause the game runs slower gradually.
-
 * v1.0 (2013/2/16)
 	* initial version.
 
