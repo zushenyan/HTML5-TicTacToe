@@ -229,7 +229,8 @@ function newGame(){
 function playSound(){
 	var url = "resource/";
 	var agent = window.navigator.userAgent.toLowerCase();
-	if(agent.indexOf("firefox")){
+	if(agent.indexOf("firefox") ||
+		agent.indexOf("msie")){
 		url += "writing.ogg";
 	}
 	else{
