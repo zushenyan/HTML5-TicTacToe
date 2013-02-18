@@ -21,6 +21,7 @@ download this repository in whatever ways you want and open index.html to start 
 [writing.wav](https://github.com/zushenyan/HTML5-TicTacToe/blob/master/resource/writing.wav) is coming from [freesound.org](http://www.freesound.org/people/braffe2/sounds/83746/) by braffe2, and the rest of images are drawn by myself.
 
 ## Licence
+MIT Licence
 > Copyright (C) 2013 Andrew Yan
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
