@@ -5,6 +5,8 @@ Another practice of HTML5 & Javascript.
 download this repository in whatever ways you want and open index.html to start playing.
 
 ## Change Log
+* v1.2 (2013/2/18)
+	* fix the bug sound won't play on IE on placing the chess.
 * v1.15 (2013/2/17)
 	* doing nothing, steady build.
 * v1.1 (2013/2/16)
