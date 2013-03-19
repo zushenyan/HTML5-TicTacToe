@@ -4,6 +4,8 @@ Another practice of HTML5 & Javascript.
 ## How to Play
 download this repository in whatever ways you want and open index.html to start playing.
 
+Or you can play it online [here](http://zushenyan.github.com/HTML5-TicTacToe).
+
 ## Change Log
 * v1.2 (2013/2/18)
 	* fix the bug sound won't play on IE on placing the chess.
