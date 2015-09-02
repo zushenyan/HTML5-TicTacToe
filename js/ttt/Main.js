@@ -1,4 +1,4 @@
-(function(window, TicTacToe){
+define(["./TicTacToe", "./Chess", "./Resources", "./BoardManager", "./AnimationFactory"], function(TicTacToe){
 	//game data
 	var _bm = null,
 			_lastTime = null,
@@ -250,8 +250,5 @@
 		_fpsMeter.innerHTML = (1000 / elapsedTime).toFixed(1) + " fps";
 	}
 
-	window.onload = init;
-})(
-	((window !== "undefined") ? window : this),
-	(TicTacToe ? TicTacToe : {})
-	);
+	init();
+});
