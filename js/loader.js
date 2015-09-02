@@ -1,0 +1,11 @@
+requirejs(
+	[
+		"Animation",
+		"GameObject",
+		"Chess",
+		"Board",
+		"BoardManager",
+		"AnimationFactory",
+		"Main"
+	]
+);
