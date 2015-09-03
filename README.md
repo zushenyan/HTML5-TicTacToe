@@ -1,12 +1,18 @@
 # HTML5 TicTacToe
 Another practice of HTML5 & Javascript.
 
+DOES NOT SUPPORT MOBILE DEVICES because it was not included in the original design.
+
 ## How to Play
 download this repository in whatever ways you want and open index.html to start playing.
 
 Or you can play it online [here](http://zushenyan.github.com/HTML5-TicTacToe).
 
 ## Change Log
+* v2.0 (2015/9/3)
+	* rewritten the structure with TypeScript & ES6 standard.
+* v1.9 (2015/9/2)
+	* redesigned the original structure with RequireJs. Now HTTP request for the media won't request again when a chess is placed, only request once when the script was loaded.
 * v1.2 (2013/2/18)
 	* fix the bug sound won't play on IE on placing the chess.
 * v1.15 (2013/2/17)
