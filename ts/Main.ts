@@ -185,19 +185,9 @@ function mouseInput(e){
 }
 
 function getRelCursorPos(e){
-	let totalOffsetX = 0;
-	let totalOffsetY = 0;
-	let canvasX = 0;
-	let canvasY = 0;
-	let currentElement = _canvas;
-
-	do{
-		totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-		totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-	}while(currentElement = currentElement.offsetParent);
-
-	canvasX = e.pageX - totalOffsetX;
-	canvasY = e.pageY - totalOffsetY;
+  let rect = _canvas.getBoundingClientRect();
+  let canvasX = Math.round((e.clientX - rect.left) / (rect.right - rect.left) * _canvas.width);
+  let canvasY = Math.round((e.clientY - rect.top) / (rect.bottom - rect.top) * _canvas.height);
 
 	return {x: canvasX, y:canvasY};
 }

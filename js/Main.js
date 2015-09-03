@@ -119,17 +119,9 @@ define(["require", "exports", "./Chess", "./BoardManager", "./AnimationFactory",
         }
     }
     function getRelCursorPos(e) {
-        var totalOffsetX = 0;
-        var totalOffsetY = 0;
-        var canvasX = 0;
-        var canvasY = 0;
-        var currentElement = _canvas;
-        do {
-            totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-            totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-        } while (currentElement = currentElement.offsetParent);
-        canvasX = e.pageX - totalOffsetX;
-        canvasY = e.pageY - totalOffsetY;
+        var rect = _canvas.getBoundingClientRect();
+        var canvasX = Math.round((e.clientX - rect.left) / (rect.right - rect.left) * _canvas.width);
+        var canvasY = Math.round((e.clientY - rect.top) / (rect.bottom - rect.top) * _canvas.height);
         return { x: canvasX, y: canvasY };
     }
     function initGameLogic() {
