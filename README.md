@@ -1,7 +1,9 @@
 # HTML5 TicTacToe
 Another practice of HTML5 & Javascript.
 
-DOES NOT SUPPORT MOBILE DEVICES because it was not included in the original design.
+~~DOES NOT SUPPORT MOBILE DEVICES because it was not included in the original design.~~
+
+Err...well, actually it supports mobile platform, but due to its original purpose that was not for mobile, users won't get best UX during play.
 
 ## How to Play
 download this repository in whatever ways you want and open index.html to start playing.
